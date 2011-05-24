@@ -21,6 +21,9 @@ Util.computeSlope = function(p1, p2) {
 }
 
 Util.round = function(value) {
+  /*
+  return ( +( +value ).toFixed(2) );
+  */
   return new Number((new Number(value)).toFixed(2));
 };
 
@@ -30,25 +33,52 @@ Util.lerp = function(v1, v2, amount) {
 };
 
 Util.toHex = function(v1) {
-  var res = (new Number(v1).toString(16));
-  if (res.length == 1) {
+  /*
+  var res = v1.toString(16);
+
+  return ( res.length ? "0" : "" ) + res;
+  */
+  var res = v1.toString(16);
+  if ( res.length == 1 ) {
     res = "0" + res;
   }
   return res;
 }
 
 // Array extensions
-Array.prototype.sum = function(){
-	for(var i=0,sum=0;i<this.length;i++) {
-	  var val = Number(this[i]);
-	  if (!isNaN(val)) {
-	    sum += val;
+Array.prototype.sum = function() {
+  /*
+  var len = this.length >>> 0, 
+  k = 0, sum = 0, val;
+
+  for ( ; k < len; k++ ) {
+    val = +this[k];
+    sum += val || 0;
+  }
+  return sum;
+  */
+
+  for(var i=0,sum=0;i<this.length;i++) {
+    var val = Number(this[i]);
+    if (!isNaN(val)) {
+      sum += val;
     }
-	}
-	return sum;
+  }
+  return sum;
 };
 
 Array.prototype.toNumbers = function() {
+  /*
+  var len = this.length >>> 0,
+  k = 0, val;
+
+  for ( ; k < len; k++ ) {
+    val = +this[k];
+    this[k] = val || 0;
+  }
+  return this;
+  */
+
   for (var i=0; i<this.length;i++) {
     var val = Number(this[i]);
     if (!isNaN(val)) {
@@ -61,12 +91,20 @@ Array.prototype.toNumbers = function() {
 };
 
 Array.prototype.average = function() {
+  /*
+  return this.sum() / this.length;
+  */
+
   var sum = this.sum();
   var count = this.length;
   return sum/count;
 }
 
 Array.prototype.max = function() {
+  /*
+  return Math.max.apply(null, this);
+  */
+
   var maxval = 0;
   for (var i=0; i<this.length;i++) {
     var val = Number(this[i]);
@@ -76,3 +114,6 @@ Array.prototype.max = function() {
   }
   return maxval;
 }
+
+
+
